@@ -1,5 +1,7 @@
 #include "cArbol.hpp"
 #include "funciones.hpp"
+#include <iostream>
+#include <type_traits>
 void cArbol::insertar(std::string sDato){
 	if(pRaiz==nullptr)
 		pRaiz = new cNodo(sDato);
@@ -170,4 +172,77 @@ void cArbol::juego(){
 void cArbol::cargar(){
 	pRaiz = new cNodo;
 	pRaiz->cargar();
+}
+void cArbol::desarrollador(){
+	bool jugando = true;
+	std::string nuevo;
+	cNodo* pActual = pRaiz, *pAnterior = pRaiz;
+	if(vacio()){
+		std::cout << "El árbol está vacío" << std::endl;
+		jugando = false;
+	}
+	while(jugando && pActual != nullptr){
+		short hijos = pActual->cantHijos();
+		pAnterior = pActual;
+		std::string dato;
+		switch(hijos){
+			case 0:
+				std::cout << "El ejemplar es \"" << pActual->sDato << '"' << std::endl;
+				std::cout << "¿Cambiar? ";
+				if(leerSN()){
+					std::cout << "Ingrese el nuevo ejemplar: ";
+					std::getline(std::cin, dato);
+					pActual->sDato = dato;
+				}
+				jugando = false;
+			break;
+			case 1:
+				std::cout << "El ejemplar tiene \"" << pActual->sDato << '"' << std::endl;
+				std::cout << "¿Cambiar? ";
+				if(leerSN()){
+					std::cout << "Ingrese el nuevo dato: ";
+					std::getline(std::cin, dato);
+					pActual->sDato = dato;
+				}
+				std::cout << "El único hijo es:" << std::endl;
+				if(pActual->pIzq){
+					std::cout << "Sí: " << pActual->pIzq->sDato << std::endl;
+				}else
+					std::cout << "No: " << pActual->pDer->sDato << std::endl;
+				std::cout << "¿Invertir? ";
+				if(leerSN())
+					std::swap(pActual->pDer, pActual->pIzq);
+				std::cout << "¿Ir a izquierda? ";
+				if(leerSN())
+					pActual = pActual->pIzq;
+				else
+					pActual = pActual->pDer;
+			break;
+			case 2:
+				std::cout << "El ejemplar tiene \"" << pActual->sDato << '"' << std::endl;
+				std::cout << "¿Cambiar? ";
+				if(leerSN()){
+					std::cout << "Ingrese el nuevo dato: ";
+					std::getline(std::cin, dato);
+					pActual->sDato = dato;
+				}
+				std::cout << "Hijos:" << std::endl;
+				std::cout << "Sí: " << pActual->pIzq->sDato << std::endl;
+				std::cout << "No: " << pActual->pDer->sDato << std::endl;
+				std::cout << "¿Invertir? ";
+				if(leerSN())
+					std::swap(pActual->pDer, pActual->pIzq);
+				std::cout << "¿Ir a izquierda? ";
+				if(leerSN())
+					pActual = pActual->pIzq;
+				else
+					pActual = pActual->pDer;
+			break;
+			default:
+			break;
+		}
+	}
+	if(!vacio())
+		std::cout << "Recorrido terminado" << std::endl;
+	pausa();
 }

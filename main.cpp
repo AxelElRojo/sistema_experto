@@ -7,30 +7,32 @@
 #else
 #define CLEAR "clear"
 #endif
-enum OPCIONES{JUGAR=1,CARGAR,GUARDAR,SALIR};
+enum OPCIONES{JUGAR=1,CARGAR,GUARDAR,DESARROLLADOR,SALIR};
 int main(){
 	bool bRespuesta;
 	int opc;
-	cArbol pino;
+	cArbol arbol;
 	do{
 		std::system(CLEAR);
 		opc = menu();
 		switch(opc){
 			case JUGAR:
-				pino.juego();
+				arbol.juego();
 			break;
 			case CARGAR:
-				pino.cargar();
+				arbol.cargar();
 			break;
 			case GUARDAR:
-				pino.preOrder();
+				arbol.preOrder();
+			break;
+			case DESARROLLADOR:
+				arbol.desarrollador();
 			break;
 			case SALIR:
 			break;
 			default:
-			std::cout << "Ingrese una opcion válida" << std::endl;
-			pausa();
-
+				std::cout << "Ingrese una opcion válida" << std::endl;
+				pausa();
 		}
 	}while(opc!=SALIR);
 }

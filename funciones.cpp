@@ -1,14 +1,15 @@
 #include "funciones.hpp"
 bool leerSN(){
-	char letra = 0;
+	std::string letra = "";
 	std::cout << "(s/n): ";
-	while(letra != 'S' && letra != 's' && letra != 'N' && letra!='n')
+	while(letra[0] != 'S' && letra[0] != 's' && letra[0] != 'N' && letra[0] != 'n')
 		std::cin >> letra;
-	return (letra == 'S' || letra == 's');
+	std::cin.ignore();
+	return (letra[0] == 'S' || letra[0] == 's');
 }
 int menu(){
 	int opc;
-	std::cout << "1. Buscar\n2. Cargar\n3. Guardar\n4. Salir\nEscoja una opción: ";
+	std::cout << "1. Buscar\n2. Cargar\n3. Guardar\n4. Desarrollador\n5. Salir\nEscoja una opción: ";
 	std::cin >> opc;
 	return opc;
 }

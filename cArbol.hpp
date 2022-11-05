@@ -14,6 +14,7 @@ class cArbol{
 	void eliminar(std::string);
 	bool vacio();
 	void juego();
+	void desarrollador();
 	void cargar();
 	private:
 	cNodo* buscarMalPadre(std::string);
