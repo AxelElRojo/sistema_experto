@@ -17,4 +17,4 @@ funciones.o: funciones.cpp
 	g++ -c funciones.cpp
 
 clean:
-	$(RM) $(TARGET)
+	rm *.o akinator
